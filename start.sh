@@ -7,7 +7,7 @@ rest_port=${XPUM_REST_PORT:-29999}
 rest_user=${XPUM_REST_USER:-xpumadmin}
 rest_pass=${XPUM_REST_PASS:-password}
 
-/app/config_gen.py --user ${rest_user} --pass ${rest_pass}
+/app/config_gen.py --user ${rest_user} --password ${rest_pass}
 
 if [ "${rest_disable}" = "1" ]; then
     /usr/bin/xpumd -s ${socket_folder}

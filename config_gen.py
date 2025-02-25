@@ -19,11 +19,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument( "-u", "--user", help="username for the generated config file" )
-    parser.add_argument( "-p", "--pass", help="password for the generated config file" )
+    parser.add_argument( "-p", "--password", help="password for the generated config file" )
     args = parser.parse_args()
 
     user = args.user if args.user else 'xpumadmin'
-    pw = args.pass if args.pass else 'password'
+    pw = args.password if args.password else 'password'
 
     salt = os.popen( 'tr -dc A-Za-z0-9 < /dev/urandom |head -c 12' ).read()
     pwHash = hashlib.pbkdf2_hmac('sha512', pw.encode('ASCII'), salt.encode('ASCII'), 10000).hex()
