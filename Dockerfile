@@ -35,7 +35,7 @@ RUN curl -s https://api.github.com/repos/intel/xpumanager/releases/latest | \
 RUN apt-get install -y /app/xpumanager.deb
 
 # Install python dependencies
-RUN python -m venv venv
+RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip3 install --no-cache-dir -r /usr/lib/xpum/rest/requirements.txt
 
