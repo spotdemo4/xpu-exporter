@@ -4,8 +4,8 @@ socket_folder=${XPUM_SOCKET_FOLDER:-/tmp}
 rest_disable=${XPUM_REST_DISABLE:-0}
 rest_host=${XPUM_REST_HOST:-0.0.0.0}
 rest_port=${XPUM_REST_PORT:-29999}
-rest_user=${XPUM_REST_USER:xpumadmin}
-rest_pass=${XPUM_REST_PASS:password}
+rest_user=${XPUM_REST_USER:-xpumadmin}
+rest_pass=${XPUM_REST_PASS:-password}
 
 /app/config_gen.py --user ${rest_user} --pass ${rest_pass}
 
