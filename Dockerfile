@@ -7,6 +7,7 @@ COPY . .
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
+    gunicorn \
     gnupg2
 
 # Install the Intel graphics GPG public key
@@ -32,4 +33,4 @@ RUN curl -s https://api.github.com/repos/intel/xpumanager/releases/latest | \
 
 RUN apt-get install -y /app/xpumanager.deb
 
-ENTRYPOINT ["xpumd"]
+ENTRYPOINT ["/app/start.sh"]
