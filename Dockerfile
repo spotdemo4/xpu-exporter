@@ -19,6 +19,8 @@ RUN wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | \
 RUN echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu noble unified" | \
     tee /etc/apt/sources.list.d/intel-gpu-noble.list
 
+RUN apt-get update
+
 # # Update the package repository metadata and install compute-related packages
 # RUN apt-get update && apt-get install -y \
 #     libze-intel-gpu1 \
