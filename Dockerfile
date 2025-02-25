@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     wget \
     gnupg2
 
@@ -20,7 +20,7 @@ RUN echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg]
     tee /etc/apt/sources.list.d/intel-gpu-noble.list
 
 # Update the package repository metadata and install compute-related packages
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     libze-intel-gpu1 \
     libze1 \
     intel-opencl-icd \
@@ -29,9 +29,9 @@ RUN apt update && apt install -y \
 
 # Installing XPU Manager
 # https://github.com/intel/xpumanager
-RUN wget -O xpumanager.deb \
+RUN wget -O /app/xpumanager.deb \
  https://github.com/intel/xpumanager/releases/download/V1.2.39/xpu-smi_1.2.39_20240906.085820.11f3c29a+deb10u1_amd64.deb
 
-RUN apt install -y xpumanager.deb
+RUN apt-get install -y /app/xpumanager.deb
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
