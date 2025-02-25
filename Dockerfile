@@ -6,8 +6,8 @@ COPY . .
 
 RUN apt-get update && apt-get install -y \
     wget \
-    gnupg2 \
-    gh
+    curl \
+    gnupg2
 
 # Install the Intel graphics GPG public key
 # https://dgpu-docs.intel.com/driver/client/overview.html
@@ -22,10 +22,13 @@ RUN apt-get update
 
 # Installing XPU Manager
 # https://github.com/intel/xpumanager
-RUN gh release download \
-    --pattern '*24.04_amd64.deb' \
-    --output /app/xpumanager.deb \
-    --repo intel/xpumanager
+RUN curl -s https://api.github.com/repos/intel/xpumanager/releases/latest | \
+    grep '"browser_download_url":' | \
+    grep '24.04_amd64.deb' | \
+    grep -vE '(\.pem|\.sig)' | \
+    grep -vE 'xpu-smi' | \
+    grep -o 'https://[^"]*' | \
+    wget -qO /app/xpumanager.deb -i -
 
 RUN apt-get install -y /app/xpumanager.deb
 
