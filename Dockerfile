@@ -7,7 +7,8 @@ COPY . .
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
-    gunicorn \
+    python3 \
+    python3-pip \
     gnupg2
 
 # Install the Intel graphics GPG public key
@@ -32,5 +33,8 @@ RUN curl -s https://api.github.com/repos/intel/xpumanager/releases/latest | \
     wget -qO /app/xpumanager.deb -i -
 
 RUN apt-get install -y /app/xpumanager.deb
+
+# Install python dependencies
+RUN pip3 install -r /usr/lib/xpum/rest/requirements.txt
 
 ENTRYPOINT ["/app/start.sh"]
