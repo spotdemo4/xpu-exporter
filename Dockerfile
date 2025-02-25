@@ -6,12 +6,11 @@ COPY . .
 
 RUN apt-get update && apt-get install -y \
     wget \
-    gnupg2
-
-# # Installing Intel GPU driver
-# # https://dgpu-docs.intel.com/driver/client/overview.html
+    gnupg2 \
+    gh
 
 # Install the Intel graphics GPG public key
+# https://dgpu-docs.intel.com/driver/client/overview.html
 RUN wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | \
     gpg --yes --dearmor --output /usr/share/keyrings/intel-graphics.gpg
 
@@ -21,19 +20,13 @@ RUN echo "deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg]
 
 RUN apt-get update
 
-# # Update the package repository metadata and install compute-related packages
-# RUN apt-get update && apt-get install -y \
-#     libze-intel-gpu1 \
-#     libze1 \
-#     intel-opencl-icd \
-#     clinfo \
-#     intel-gsc
-
 # Installing XPU Manager
 # https://github.com/intel/xpumanager
-RUN wget -O /app/xpumanager.deb \
-    https://github.com/intel/xpumanager/releases/download/V1.2.39/xpumanager_1.2.39_20240906.085820.11f3c29a.u24.04_amd64.deb
+RUN gh release download \
+    --pattern '*24.04_amd64.deb'
+    --output /app/xpumanager.deb
+    --repo intel/xpumanager
 
 RUN apt-get install -y /app/xpumanager.deb
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["xpumd"]
