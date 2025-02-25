@@ -32,7 +32,7 @@ RUN apt-get update
 # Installing XPU Manager
 # https://github.com/intel/xpumanager
 RUN wget -O /app/xpumanager.deb \
- https://github.com/intel/xpumanager/releases/download/V1.2.39/xpu-smi_1.2.39_20240906.085820.11f3c29a+deb10u1_amd64.deb
+    https://github.com/intel/xpumanager/releases/download/V1.2.39/xpumanager_1.2.39_20240906.085820.11f3c29a.u24.04_amd64.deb
 
 RUN apt-get install -y /app/xpumanager.deb
 
