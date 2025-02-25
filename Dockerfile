@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     python3 \
     python3-pip \
-    python3-venv \
     gnupg2
 
 # Install the Intel graphics GPG public key
@@ -36,8 +35,6 @@ RUN curl -s https://api.github.com/repos/intel/xpumanager/releases/latest | \
 RUN apt-get install -y /app/xpumanager.deb
 
 # Install python dependencies
-RUN python3 -m venv venv
-RUN . venv/bin/activate
-RUN pip3 install --no-cache-dir -r /usr/lib/xpum/rest/requirements.txt
+RUN pip install --no-cache-dir -r /usr/lib/xpum/rest/requirements.txt
 
 ENTRYPOINT ["/app/start.sh"]
