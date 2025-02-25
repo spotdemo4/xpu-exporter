@@ -5,7 +5,8 @@ WORKDIR /app
 COPY . .
 
 RUN apt update && apt install -y \
-    wget
+    wget \
+    gnupg2
 
 # Installing Intel GPU driver
 # https://dgpu-docs.intel.com/driver/client/overview.html
