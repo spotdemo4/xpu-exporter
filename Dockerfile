@@ -23,8 +23,8 @@ RUN apt-get update
 # Installing XPU Manager
 # https://github.com/intel/xpumanager
 RUN gh release download \
-    --pattern '*24.04_amd64.deb'
-    --output /app/xpumanager.deb
+    --pattern '*24.04_amd64.deb' \
+    --output /app/xpumanager.deb \
     --repo intel/xpumanager
 
 RUN apt-get install -y /app/xpumanager.deb
